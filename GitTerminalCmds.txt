@@ -1,0 +1,354 @@
+To list directories: ls
+Show Hidden files: ls -a
+To open dialog box of root directory: explorer . or start .
+To move in directory: cd
+To move 1 level back directory: cd ..
+To give current path or location: pwd
+To create new directory: mkdir foldername
+To create file: type nul > filename.txt .png .pdf OR touch filename
+To remove directory: rmdir foldername
+To remove file: del filename
+To Uninitialize .git: rm -rf .git
+
+
+
+GIT BASH COMMANDS:
+To get info about committments & author info: git log
+
+NOTE:-
+    If there is git repo in root directory then don't need to initialized it in other sub directories of that root directory
+
+To open WIM editor in Git bash: git commit
+Insert mode: i 
+Then : esc 
+To quit WIM-> :wq
+
+git log commands:
+git log --abbrev-commit
+git log --oneline
+
+To open VIM editor:
+git commit -a 
+git commit -ammend
+
+.gitignore file:
+If its file: s.txt
+If its directory: node_modules/
+
+To list branches: git branch 
+Create branch: git branch branchname
+To switch from 1 to another branch: git switch branchname 
+
+git commit -a -m "messaage"
+git commit -am 'messaage'
+
+To switch from 1 to another branch:     git checkout branchname 
+To create and switch to it all in 1 go: - git switch -c branchname
+                                        - git branch -m branchname   
+
+When u switch branches, sometimes if u have unstage changes then they will come with u.
+
+To delete branch: - git branch -d branchname
+                  - git branch -D branchname 
+NOTE:- We cant delete branch on which we r checkout 
+
+To read content of the files in .git folder:
+ls -a
+cd .git 
+ls
+cat HEAD
+
+TO merge branches:
+git switch master 
+git merge branchname
+
+MERGING BRANCHES: 
+1. Fast Forward Merge 
+2. Merge with No Conflicts
+3. Conflicts
+
+GIT DIFF: Compares Staging area & working directory 
+git diff (SHOWS UNSTAGED CHANGES)
+git diff HEAD (SHOWS ALL UNSTAGED & STAGED CHANGES): List all changes in the working tree since your last commit 
+    git status 
+    git add numbers.txt 
+    git diff HEAD 
+
+git diff --staged or git diff --cached (SHOWS STAGED CHANGES)
+git diff branch1..branch2 or git diff branch1 branch2
+git diff branch2..branch1 or git diff branch2 branch1
+git diff commits1..commits2
+
+git diff branch1 branch2 file1
+git diff HEAD HEAD~1: Its just a short syntax for the parent commit of HEAD
+git diff HEAD~1
+
+STASHING
+git stash or git stash save
+git stash pop
+git stash apply
+git stash list 
+git stash apply stash_id, Eg: git stash apply stash@{1} 
+git stash drop stash_id
+git stash clear 
+
+cat .git/HEAD 
+
+CHECKOUT:=>
+1. DETACHING HEAD 
+    git switch -
+    git checkout HEAD~1
+
+2. DISCARDING CHANGES 
+    git checkout HEAD <filename>
+    Revert back to HEAD:  git checkout -- <filename>, // git checkout -- cat.txt dog.txt 
+
+3. GIT RESTORE 
+    git restore <filename>
+    git restore file1 file2 (UNMODIFY FILES)
+    git restore --source HEAD~1 <filename>
+    git restore --staged filename (UNSTAGED FILES)
+
+4. RESETING COMMITS
+    PLAIN RESET: git reset commit_id (IT LOSE COMMITS AND NOT THE CHANGES)
+    (REMOVE THE COMMITS BUT NOT CHANGES IN THE WORKING DIR)
+
+    HARD RESET: git reset --hard commit_id 
+
+5. REVERTING COMMITS 
+    git revert commit_id 
+
+git reset is used when we want to unstage a file and bring our changes back to the working directory. 
+git revert is used to remove the commits from the remote repository. 
+
+GITHUB 
+git config user.email 
+=> SSH KEY: ssh-keygen -t ed25519 -C  "your_email@example.com"
+
+GENERATE SSH KEY
+t is type of protocols here & b is bits how many bits for this key is enough to be secure & C is the comment 
+1) ssh-keygen -t rsa -b 4096 -C "khushboo.m@crestinfosystems.com"
+
+TO CHECK WHETHER SSH KEY IS THERE OR NOT
+
+2) ls ~/.ssh
+OR
+2) ls -a -l ~/.ssh
+
+Add private key to your system & add public key to github
+
+TO CHECK SSH AGENT IS RUNNING OR NOT
+3) eval $(ssh-agent -s)
+
+ADD SSH KEY
+4) ssh-add ~/.ssh/id_rsa
+
+5) cat ~/.ssh/id_rsa.pub
+output of step 5 copy it and paste it to Key part on github after creating 'New SSH Key'
+
+6) create ssh key on github account: Settings > SSH and GPG Keys > New SSH Key > Add title > Add Key by copy pasting from above step 5 output > Add SSH Key
+
+CHECK SSH CONNECTION TO GITHUB
+7) ssh -T git@github.com
+
+
+BASIC AUTHENTICATION FROM 1 GITHUB ACCOUNT TO ANOTHER
+1) Signin to the account which want to connect
+2) To right account settings > Developer Settings > Generate Token > Select all check boxes  
+
+3) Token: Token1
+
+https://Token1@github.com/khushboo053/weather-website.git
+
+git remote set-url origin https://Token1@github.com/khushboo053/weather-website.git
+
+git push origin -u master
+
+GIT REMOTE 
+git remote 
+git remote -v 
+git remote add <name> <url>
+git branch -M main 
+
+GIT PUSH 
+git push <remote> <branch>
+Eg: git push -u origin main 
+
+To push our local pancake branch up to a remote branch called waffle:=>
+git push origin <localBranch>:<remoteBranch>
+git push origin pancake:waffle // PUSHING CATS BRANCH TO MASTER BRANCH 
+
+git push -u origin branchName (-u MEANS UPSTREAM BRANCH)
+git push (THIS WILL PUSH TO THE BRANCH WHICH IS UPSTREAM) 
+NOTE:- 
+    If we want to work on the main branch, we just clone it & we have the main branch 
+
+TO RENAME A BRANCH FROM MAIN TO MASTER OR FROM ANY BRANCH TO ANY OTHER BRANCH 
+git branch -M master (AFTER EXECUTING THIS CMD, THERE IS NO MAIN BRANCH AVAILABLE)
+
+REMOTE TRACKING BRANCHES 
+To view the remote branches our local repo knows about: git branch -r
+
+git checkout origin/main 
+
+GIT FETCH
+git fetch <remote> (Default remote: origin)
+git fetch <remote> <branch>
+Eg: git fetch origin food 
+
+GIT PULL
+git pull = fetch + merge
+
+FETCH THE LATEST INFO FROM ORIGIN'S MASTER BRANCH & MERGE THOSE CHANGES INTO OUR CURRENT BRANCH 
+git pull origin master
+
+REBASING
+To main ways of using rebase: - as an alternative to merging 
+                              - as a cleanup tool   
+
+On Feature Branch -> 
+    git switch feature 
+    git rebase master 
+
+To resolve Conflicts: git rebase --continue
+
+INTERACTIVE REBASE: git rebase -i HEAD~9
+
+Commands: pick, reword, fixup, drop 
+
+SEMANTIC VERSIONING: https://semver.org/
+
+GIT TAGS: 
+To view List of tags: 
+    git tag
+    git tag -l
+    git tag -l 'v17*'
+
+To view tags which includes 'beta': 
+    git tag -l '*beta*'
+
+Checkout: 
+    git checkout v1.0.5                 // v1.0.5 is the name of the tag
+
+Diff: 
+    git diff tag1 tag2 
+
+Types: Lightweight & Annoted
+To create new Lightweight Tag: 
+    git tag v17.0.3                    // v17.0.3 is tagname
+
+To create new Annoted Tag: 
+    git tag -a v17.0.3    
+
+Tag Info: git show tagName
+
+Tagging previous commits: 
+    git tag tagName commit-hash
+    git tag my-tag 6547e1253
+
+Replacing tags with force:
+    git tag my-tag 6547e1253 -f
+
+Deleting Tags 
+    git  tag -d my-tag
+
+Pushing Tags:
+    git push remoteName tagName -> git push origin my-tag
+    git push remoteName --tags  -> git push origin --tags
+
+
+
+GIT BEHIND THE SCENES: HASHING & OBJECTS 
+cd .git 
+5 files: objects, config, HEAD, index, refs
+
+config:- 
+        git config --local user.name
+
+        git diff HEAD~23
+
+In .git/config file: 
+    [color "branch"]
+	    local = cyan bold
+	    current = yellow bold
+
+In .git/refs/heads folder:
+    In this, it has file of each branch which containes current commit-hash.
+
+In HEAD file : 
+    It refers to a branch name  or directly contains the hash code of the last commit if it is on detached head.
+    To switch out from detached head: git switch -
+    
+Git Objects: 4 Types: commit, tree, blob, annotated tag
+
+GIT HASHING
+Store data in git object database:
+    echo 'Hii' | git hash-object --stdin
+    echo 'Hii' | git hash-object --stdin -w   // -w keyword to actually write the object to DB 
+
+Retrieving data which is stored in git object database:
+    git cat-file -p <object-hash>       // -p keyword for pretty print
+    git cat-file -p 80d4870ce145a427c7482a7b11178598cbaf7f69
+    OR 
+    git cat-file -p 80d4870
+
+    git hash-object dogs.txt
+    git hash-object dogs.txt -w 
+    git cat-file <object-hash> -p
+
+To Restore to the last object data stored in DB:
+        git cat-file -p ae7670c2 > dogs.txt
+
+Git Objects:  Commit -> Tree -> Blob -> Tag (Annotated)
+Blobs: Stores content of file 
+Tree: Stores content of directory
+
+Tree :  Each entry in tree represents one file or subdirectory.
+Viewing Trees: 
+            git cat-file -p master^{tree}
+
+To view content of this file: 
+            git cat-file -p ea3cb19fcaf62b95379376216f643fe5e297c4b7
+
+            // -t type of typo of object
+            git cat-file -t ea3cb19fcaf62b95379376216f643fe5e297c4b7    
+
+Commits: Commit objects combine tree object along with info abt the context that led to the current tree 
+
+REFLOG COMMAND: 
+    git reflog show HEAD
+    git reflog show branchName
+
+    echo 'hahahah' > haha.txt 
+
+     git reflog show donkey@{1}
+
+     git checkout HEAD~2            // Grandparent Commit 
+     git checkout HEAD@{2}          // On that commit only 
+
+     git diff donkey@{0} donkey@{1}
+    git diff HEAD HEAD@{yesterday}
+    git diff master master@{yesterday}
+    git reflog show HEAD@{2.days.ago}
+    git reflog show HEAD@{two.days.ago}
+    git reflog show HEAD@{one.minute.ago}
+    git reflog show HEAD@{one.month.ago}
+
+    git reset --hard commit-hash     // Add commit-hash which u have to undo
+    NOTE:- 
+        Even after reset, that commit is available in reflog
+    git reflog show master
+    git reset --hard master@{1}         // Commit which deleted can be redo 
+    OR 
+     git reset --hard 21647b3
+    git log --oneline    
+
+GIT ALIASES
+
+    In .git/config file add:  
+        [alias]
+            s = status 
+
+    In git bash: 
+        git config --global alias.showmebranches branch
+        git showmebranches
